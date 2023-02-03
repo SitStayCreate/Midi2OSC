@@ -1,7 +1,6 @@
 package com.SitStayCreate.GUI;
 
 import com.SitStayCreate.MidiGrid.MidiGridAdapter;
-import com.SitStayCreate.VirtualGrid.VirtualGridController;
 import com.SitStayCreate.Constants;
 
 import javax.swing.*;
@@ -18,11 +17,6 @@ public class DTPane extends JScrollPane {
     }
 
     public void addRow(MidiGridAdapter grid){
-        devicesTable.addRow(grid);
-        updateUI();
-    }
-
-    public void addRow(VirtualGridController grid){
         devicesTable.addRow(grid);
         updateUI();
     }

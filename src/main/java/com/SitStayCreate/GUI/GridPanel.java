@@ -2,7 +2,6 @@ package com.SitStayCreate.GUI;
 
 import com.SitStayCreate.GUI.ActionListeners.SBActionListener;
 import com.SitStayCreate.GUI.ActionListeners.TypeRB1ActionListener;
-import com.SitStayCreate.GUI.ActionListeners.TypeRB2ActionListener;
 import com.SitStayCreate.Serialosc.RequestServer;
 import com.SitStayCreate.Constants;
 
@@ -13,7 +12,6 @@ public class GridPanel extends JPanel {
 
     private final JLabel errorLabel;
     private final JTextField portInTextField;
-    private final JRadioButton typeRB2;
 
     public GridPanel(MidiPanel midiPanel,
                      int font,
@@ -22,7 +20,6 @@ public class GridPanel extends JPanel {
         int bigFont = font;
 
         Font labelFont = new Font(Font.MONOSPACED, Font.PLAIN, font);
-        Font rbuttonFont = new Font(Font.MONOSPACED, Font.PLAIN, font);
         Font tfieldFont = new Font(Font.MONOSPACED, Font.PLAIN, bigFont);
         Font buttonFont = new Font(Font.MONOSPACED, Font.PLAIN, font);
 
@@ -50,53 +47,6 @@ public class GridPanel extends JPanel {
         bagLayout.setConstraints(portInTextField, constraints);
         add(portInTextField);
 
-        errorLabel = new JLabel();
-        errorLabel.setForeground(Color.RED);
-        errorLabel.setFont(labelFont);
-        constraints.gridwidth = 2;
-        constraints.gridx = 2;
-        constraints.gridy = 0;
-        constraints.insets = new Insets(0, 0, 5, 0);
-        bagLayout.setConstraints(errorLabel, constraints);
-        add(errorLabel);
-
-        //Grid Type
-        JLabel typeLabel = new JLabel(Constants.TYPE_LABEL);
-        typeLabel.setFont(labelFont);
-        typeLabel.setForeground(Color.WHITE);
-        typeLabel.setBackground(Color.DARK_GRAY);
-        constraints.gridwidth = 1;
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        bagLayout.setConstraints(typeLabel, constraints);
-        add(typeLabel);
-
-        ButtonGroup typeRadioButtons = new ButtonGroup();
-
-        JRadioButton typeRB1 = new JRadioButton(Constants.TYPE_RB1_LABEL);
-        typeRB1.setFont(rbuttonFont);
-        typeRB1.setForeground(Color.WHITE);
-        typeRB1.setBackground(Color.DARK_GRAY);
-        typeRB1.setSelected(true);
-        typeRB1.addActionListener(new TypeRB1ActionListener(midiPanel));
-        typeRadioButtons.add(typeRB1);
-        constraints.gridx = 1;
-        constraints.gridy = 1;
-        bagLayout.setConstraints(typeRB1, constraints);
-        add(typeRB1);
-
-        typeRB2 = new JRadioButton(Constants.TYPE_RB2_LABEL);
-        typeRB2.setFont(rbuttonFont);
-        typeRB2.setForeground(Color.WHITE);
-        typeRB2.setBackground(Color.DARK_GRAY);
-        typeRB2.addActionListener(new TypeRB2ActionListener(midiPanel));
-        typeRadioButtons.add(typeRB2);
-        constraints.gridx = 2;
-        constraints.gridy = 1;
-        bagLayout.setConstraints(typeRB2, constraints);
-        add(typeRB2);
-
-
         //Create Button
         JButton createButton = new JButton(Constants.CREATE_BUTTON_LABEL);
         createButton.setFont(buttonFont);
@@ -105,11 +55,21 @@ public class GridPanel extends JPanel {
                 midiPanel,
                 requestServer,
                 devicePane));
-        constraints.gridx = 3;
-        constraints.gridy = 1;
+        constraints.insets = new Insets(0, 10, 5, 0);
+        constraints.gridx = 2;
+        constraints.gridy = 0;
         bagLayout.setConstraints(createButton, constraints);
         add(createButton);
 
+        errorLabel = new JLabel();
+        errorLabel.setForeground(Color.RED);
+        errorLabel.setFont(labelFont);
+        constraints.gridwidth = 2;
+        constraints.gridx = 3;
+        constraints.gridy = 0;
+        constraints.insets = new Insets(0, 10, 5, 0);
+        bagLayout.setConstraints(errorLabel, constraints);
+        add(errorLabel);
     }
 
     public int getPortIn(){
@@ -125,9 +85,5 @@ public class GridPanel extends JPanel {
 
     public void clearErrorLabel(){
         errorLabel.setVisible(false);
-    }
-
-    public boolean isVGrid(){
-        return typeRB2.isSelected();
     }
 }

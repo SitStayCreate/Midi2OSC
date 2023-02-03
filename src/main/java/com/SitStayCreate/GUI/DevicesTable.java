@@ -3,7 +3,6 @@ package com.SitStayCreate.GUI;
 import com.SitStayCreate.GUI.ActionListeners.DropActionListener;
 import com.SitStayCreate.MidiGrid.MidiGridAdapter;
 import com.SitStayCreate.Serialosc.Dimensions;
-import com.SitStayCreate.VirtualGrid.VirtualGridController;
 import com.SitStayCreate.Constants;
 
 import javax.swing.*;
@@ -84,37 +83,6 @@ public class DevicesTable extends JPanel implements Scrollable {
             constraints.gridx++;
         }
 
-        tableComponents.put(grid.getId(), components);
-        yConstraint++;
-    }
-
-    //VGrid
-    public void addRow(VirtualGridController grid) {
-        Dimensions dims = grid.getDimensions();
-
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.insets = new Insets(0, 10, 0, 10);
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.gridx = 0;
-        constraints.gridy = yConstraint;
-
-        JComponent[] components = new JComponent[6];
-        JButton deleteButton = new JButton(Constants.DELETE_LABEL);
-        deleteButton.setPreferredSize(new Dimension(15, 15));
-        deleteButton.addActionListener(new DropActionListener(this, grid));
-        components[0] = deleteButton;
-        components[1] = new JLabel(grid.getId());
-        components[2] = new JLabel(dims.getWidth() + Constants.DEVICE_DIMS_LABEL + dims.getHeight());
-        components[3] = new JLabel(String.valueOf(grid.getDecoratedOSCPortIn().getPortIn()));
-        components[4] = new JLabel(String.valueOf(dims.isInverted()));
-        components[5] = new JLabel(Constants.DELETE_LABEL);
-
-        for(JComponent component : components){
-            constraints.gridy = yConstraint;
-            bagLayout.setConstraints(component, constraints);
-            add(component);
-            constraints.gridx++;
-        }
         tableComponents.put(grid.getId(), components);
         yConstraint++;
     }

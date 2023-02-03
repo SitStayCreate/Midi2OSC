@@ -6,7 +6,6 @@ import com.SitStayCreate.GUI.MidiPanel;
 import com.SitStayCreate.MidiGrid.HardwareDevice;
 import com.SitStayCreate.MidiGrid.MidiGridAdapter;
 import com.SitStayCreate.Serialosc.*;
-import com.SitStayCreate.VirtualGrid.VGridFrame;
 import com.SitStayCreate.Constants;
 
 import java.util.List;
@@ -61,12 +60,6 @@ public class SBActionListener implements ActionListener {
         }
 
         gridPanel.clearErrorLabel();
-
-        //Test to see if user wants a virtual grid or midi grid
-        if(gridPanel.isVGrid()){
-            new VGridFrame(requestServer, devicePane, portIn);
-            return;
-        }
 
 
         HardwareDevice hardwareDevice = midiPanel.createHardwareDevice();

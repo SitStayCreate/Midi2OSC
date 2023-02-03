@@ -20,9 +20,6 @@ public class Constants {
     // GridPanel
     public final static String PORT_IN_LABEL = "Port in: ";
     public final static String DEFAULT_PORT_NUMBER = "8080";
-    public final static String TYPE_LABEL = "Type: ";
-    public final static String TYPE_RB1_LABEL = "Midi";
-    public final static String TYPE_RB2_LABEL = "VGrid";
     public final static String CREATE_BUTTON_LABEL = "Create";
     public final static int CREATE_BUTTON_WIDTH = 120;
     public final static int CREATE_BUTTON_HEIGHT = 40;
@@ -46,7 +43,7 @@ public class Constants {
     // ActionListeners
 
     // SBActionListener
-    public final static String ERROR_LABEL = "Unavailable port";
+    public final static String ERROR_LABEL = "Port in use";
     public final static int DEFAULT_PORT = 10000;
 
     // OSC Regexes
@@ -69,15 +66,6 @@ public class Constants {
     // RequestServer
     public static final int PORT_NUMBER = 12002;
     public static final String THEY_WHO_SHALL_NOT_BE_NAMED = "monome ";
-
-    // VirtualGridController
-    public final static int LED_COLOR_CAPACITY = 4;
-    public final static int HEIGHT = 8;
-    public final static int WIDTH = 16;
-    public final static String COLOR_LEVEL_TWO = "#006666";
-    public final static String COLOR_LEVEL_THREE = "#00b3b3";
-    public final static String COLOR_LEVEL_FOUR = "#00ffff";
-    public final static int BUTTON_SIZE = 60;
 
     // serialosc messages
     // RequestServer
