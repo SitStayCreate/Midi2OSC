@@ -4,11 +4,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.SitStayCreate</groupId>
-  <artifactId>cerealosc</artifactId>
+  <artifactId>Midi2OSC</artifactId>
   <version>1.1.03</version>
   <packaging>jar</packaging>
 
-  <name>cerealosc</name>
+  <name>Midi2OSC</name>
   <url>https://www.SitStayCreate.com</url>
 
   <properties>
@@ -69,7 +69,7 @@
               <descriptorRefs>
                   <descriptorRef>jar-with-dependencies</descriptorRef>
               </descriptorRefs>
-              <finalName>cerealosc-1.1.1</finalName>
+              <finalName>Midi2OSC-1.0.0</finalName>
               <appendAssemblyId>false</appendAssemblyId>
           </configuration>
         </plugin>
