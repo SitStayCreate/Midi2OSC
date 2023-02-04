@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class Main {
 
-    private final static String TITLE = "CerealOSC";
+    private final static String TITLE = "Midi2OSC";
     private final static int FRAME_WIDTH = 500;
     private final static int FRAME_HEIGHT = 360;
 

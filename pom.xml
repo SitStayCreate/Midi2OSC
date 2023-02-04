@@ -69,7 +69,7 @@
               <descriptorRefs>
                   <descriptorRef>jar-with-dependencies</descriptorRef>
               </descriptorRefs>
-              <finalName>Midi2OSC-1.0.0</finalName>
+              <finalName>Midi2OSC-1.0.1</finalName>
               <appendAssemblyId>false</appendAssemblyId>
           </configuration>
         </plugin>
