@@ -1,11 +1,14 @@
 package com.SitStayCreate.GUI.ActionListeners;
 
+import com.SitStayCreate.CerealOSC.MonomeApp.MonomeApp;
+import com.SitStayCreate.CerealOSC.MonomeDevice.GridController;
+import com.SitStayCreate.CerealOSC.MonomeDevice.MonomeController;
+import com.SitStayCreate.CerealOSC.RequestServer.RequestServer;
 import com.SitStayCreate.GUI.DTPane;
 import com.SitStayCreate.GUI.GridPanel;
 import com.SitStayCreate.GUI.MidiPanel;
 import com.SitStayCreate.MidiGrid.HardwareDevice;
 import com.SitStayCreate.MidiGrid.MidiGridAdapter;
-import com.SitStayCreate.Serialosc.*;
 import com.SitStayCreate.Constants;
 
 import java.util.List;

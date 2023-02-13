@@ -1,6 +1,6 @@
-package com.SitStayCreate.Serialosc.SysListeners;
+package com.SitStayCreate.CerealOSC.SysListeners;
 
-import com.SitStayCreate.Serialosc.MonomeController;
+import com.SitStayCreate.CerealOSC.MonomeDevice.MonomeController;
 import com.illposed.osc.OSCMessageEvent;
 import com.illposed.osc.OSCMessageListener;
 

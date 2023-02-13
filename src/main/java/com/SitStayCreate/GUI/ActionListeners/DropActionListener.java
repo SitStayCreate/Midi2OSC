@@ -1,7 +1,7 @@
 package com.SitStayCreate.GUI.ActionListeners;
 
 import com.SitStayCreate.GUI.DevicesTable;
-import com.SitStayCreate.Serialosc.MonomeController;
+import com.SitStayCreate.CerealOSC.MonomeDevice.MonomeController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

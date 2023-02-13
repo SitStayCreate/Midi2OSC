@@ -1,7 +1,7 @@
 package com.SitStayCreate;
 
 import com.SitStayCreate.GUI.MainPanel;
-import com.SitStayCreate.Serialosc.RequestServer;
+import com.SitStayCreate.CerealOSC.RequestServer.RequestServer;
 
 import javax.swing.*;
 import java.awt.*;

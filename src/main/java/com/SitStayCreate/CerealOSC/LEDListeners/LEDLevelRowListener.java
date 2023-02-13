@@ -1,4 +1,4 @@
-package com.SitStayCreate.Serialosc.LEDListeners;
+package com.SitStayCreate.CerealOSC.LEDListeners;
 
 import com.illposed.osc.OSCMessageEvent;
 import com.illposed.osc.OSCMessageListener;

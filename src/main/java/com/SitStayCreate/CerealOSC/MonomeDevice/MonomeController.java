@@ -1,4 +1,8 @@
-package com.SitStayCreate.Serialosc;
+package com.SitStayCreate.CerealOSC.MonomeDevice;
+
+import com.SitStayCreate.CerealOSC.OSC.DecoratedOSCPortIn;
+import com.SitStayCreate.CerealOSC.OSC.DecoratedOSCPortOut;
+import com.SitStayCreate.CerealOSC.MonomeApp.MonomeApp;
 
 import java.io.IOException;
 

@@ -1,8 +1,7 @@
 package com.SitStayCreate.GUI;
 
 import com.SitStayCreate.GUI.ActionListeners.SBActionListener;
-import com.SitStayCreate.GUI.ActionListeners.TypeRB1ActionListener;
-import com.SitStayCreate.Serialosc.RequestServer;
+import com.SitStayCreate.CerealOSC.RequestServer.RequestServer;
 import com.SitStayCreate.Constants;
 
 import javax.swing.*;

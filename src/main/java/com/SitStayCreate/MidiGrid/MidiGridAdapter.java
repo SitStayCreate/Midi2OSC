@@ -1,8 +1,12 @@
 package com.SitStayCreate.MidiGrid;
 
+import com.SitStayCreate.CerealOSC.MonomeApp.MonomeApp;
+import com.SitStayCreate.CerealOSC.MonomeDevice.Dimensions;
+import com.SitStayCreate.CerealOSC.MonomeDevice.GridController;
+import com.SitStayCreate.CerealOSC.OSC.DecoratedOSCPortIn;
+import com.SitStayCreate.CerealOSC.OSC.DecoratedOSCPortOut;
 import com.SitStayCreate.Constants;
 import com.SitStayCreate.MidiGrid.LEDListeners.*;
-import com.SitStayCreate.Serialosc.*;
 import com.illposed.osc.*;
 import com.illposed.osc.messageselector.JavaRegexAddressMessageSelector;
 

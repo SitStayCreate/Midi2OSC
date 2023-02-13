@@ -1,4 +1,4 @@
-package com.SitStayCreate.Serialosc;
+package com.SitStayCreate.CerealOSC.MonomeApp;
 
 
 import java.net.InetAddress;

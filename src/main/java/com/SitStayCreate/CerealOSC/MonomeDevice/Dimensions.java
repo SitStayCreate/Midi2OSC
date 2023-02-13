@@ -1,4 +1,4 @@
-package com.SitStayCreate.Serialosc;
+package com.SitStayCreate.CerealOSC.MonomeDevice;
 
 public class Dimensions {
     private int height;

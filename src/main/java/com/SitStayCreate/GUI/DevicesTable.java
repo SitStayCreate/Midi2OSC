@@ -2,7 +2,7 @@ package com.SitStayCreate.GUI;
 
 import com.SitStayCreate.GUI.ActionListeners.DropActionListener;
 import com.SitStayCreate.MidiGrid.MidiGridAdapter;
-import com.SitStayCreate.Serialosc.Dimensions;
+import com.SitStayCreate.CerealOSC.MonomeDevice.Dimensions;
 import com.SitStayCreate.Constants;
 
 import javax.swing.*;

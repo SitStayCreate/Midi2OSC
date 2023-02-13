@@ -1,12 +1,11 @@
 package com.SitStayCreate.MidiGrid.LEDListeners;
 
-import com.SitStayCreate.Serialosc.Dimensions;
-import com.SitStayCreate.Serialosc.LEDListeners.LEDLevelColListener;
+import com.SitStayCreate.CerealOSC.MonomeDevice.Dimensions;
+import com.SitStayCreate.CerealOSC.LEDListeners.LEDLevelColListener;
 import com.SitStayCreate.MidiGrid.OSCTranslator;
 
 import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
-import java.util.List;
 
 public class MGLEDLevelColListener extends LEDLevelColListener {
 

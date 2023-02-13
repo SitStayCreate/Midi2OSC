@@ -1,7 +1,7 @@
-package com.SitStayCreate.Serialosc.SysListeners;
+package com.SitStayCreate.CerealOSC.SysListeners;
 
-import com.SitStayCreate.Serialosc.MonomeApp;
-import com.SitStayCreate.Serialosc.GridController;
+import com.SitStayCreate.CerealOSC.MonomeApp.MonomeApp;
+import com.SitStayCreate.CerealOSC.MonomeDevice.GridController;
 import com.SitStayCreate.Constants;
 
 import com.illposed.osc.*;

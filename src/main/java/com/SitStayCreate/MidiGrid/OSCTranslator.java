@@ -1,7 +1,7 @@
 package com.SitStayCreate.MidiGrid;
 
 import com.SitStayCreate.Constants;
-import com.SitStayCreate.Serialosc.Dimensions;
+import com.SitStayCreate.CerealOSC.MonomeDevice.Dimensions;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCMessageInfo;
 

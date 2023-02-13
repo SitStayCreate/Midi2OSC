@@ -1,4 +1,4 @@
-package com.SitStayCreate.Serialosc;
+package com.SitStayCreate.CerealOSC.OSC;
 
 import com.illposed.osc.OSCPacket;
 import com.illposed.osc.OSCSerializeException;

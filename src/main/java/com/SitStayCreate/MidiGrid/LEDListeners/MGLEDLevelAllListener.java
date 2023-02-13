@@ -1,7 +1,7 @@
 package com.SitStayCreate.MidiGrid.LEDListeners;
 
-import com.SitStayCreate.Serialosc.Dimensions;
-import com.SitStayCreate.Serialosc.LEDListeners.LEDLevelAllListener;
+import com.SitStayCreate.CerealOSC.MonomeDevice.Dimensions;
+import com.SitStayCreate.CerealOSC.LEDListeners.LEDLevelAllListener;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.Receiver;

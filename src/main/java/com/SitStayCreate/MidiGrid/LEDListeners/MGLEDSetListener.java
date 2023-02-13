@@ -1,8 +1,8 @@
 package com.SitStayCreate.MidiGrid.LEDListeners;
 
 import com.SitStayCreate.MidiGrid.OSCTranslator;
-import com.SitStayCreate.Serialosc.Dimensions;
-import com.SitStayCreate.Serialosc.LEDListeners.LEDSetListener;
+import com.SitStayCreate.CerealOSC.MonomeDevice.Dimensions;
+import com.SitStayCreate.CerealOSC.LEDListeners.LEDSetListener;
 
 import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
