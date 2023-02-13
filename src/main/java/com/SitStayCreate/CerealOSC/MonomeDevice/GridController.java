@@ -1,8 +1,9 @@
 package com.SitStayCreate.CerealOSC.MonomeDevice;
 
+import com.SitStayCreate.CerealOSC.MonomeApp.MonomeApp;
 import com.SitStayCreate.CerealOSC.OSC.DecoratedOSCPortIn;
 import com.SitStayCreate.CerealOSC.OSC.DecoratedOSCPortOut;
-import com.SitStayCreate.CerealOSC.MonomeApp.MonomeApp;
+import com.SitStayCreate.CerealOSC.RequestServer.RequestServer;
 import com.SitStayCreate.CerealOSC.SysListeners.SysHostListener;
 import com.SitStayCreate.CerealOSC.SysListeners.SysInfoListener;
 import com.SitStayCreate.CerealOSC.SysListeners.SysPortListener;
@@ -20,8 +21,9 @@ public abstract class GridController extends MonomeController {
     public GridController(MonomeApp monomeApp,
                           DecoratedOSCPortIn decoratedOSCPortIn,
                           DecoratedOSCPortOut decoratedOSCPortOut,
-                          Dimensions dimensions) {
-        super(monomeApp, decoratedOSCPortIn, decoratedOSCPortOut);
+                          Dimensions dimensions,
+                          RequestServer requestServer) {
+        super(monomeApp, decoratedOSCPortIn, decoratedOSCPortOut, requestServer);
         setDimensions(dimensions);
         addSysListeners();
         getDecoratedOSCPortIn().startListening();
@@ -65,4 +67,15 @@ public abstract class GridController extends MonomeController {
     }
 
     public abstract void addLEDListeners();
+
+    @Override
+    public void close(){
+        try {
+            decoratedOSCPortIn.close();
+            decoratedOSCPortOut.close();
+            requestServer.removeMonomeController(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

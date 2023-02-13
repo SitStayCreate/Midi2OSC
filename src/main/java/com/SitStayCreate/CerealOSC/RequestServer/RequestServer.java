@@ -1,11 +1,11 @@
 package com.SitStayCreate.CerealOSC.RequestServer;
 
+import com.SitStayCreate.Constants;
+
 import com.SitStayCreate.CerealOSC.MonomeApp.MonomeApp;
 import com.SitStayCreate.CerealOSC.MonomeDevice.GridController;
 import com.SitStayCreate.CerealOSC.MonomeDevice.MonomeController;
 import com.SitStayCreate.CerealOSC.OSC.DecoratedOSCPortIn;
-import com.SitStayCreate.Constants;
-
 import com.illposed.osc.*;
 import com.illposed.osc.messageselector.OSCPatternAddressMessageSelector;
 import com.illposed.osc.transport.udp.OSCPortIn;
@@ -27,12 +27,12 @@ public class RequestServer {
 
     //List of oscDevices
     //TODO: Make this a set - look at how equality works with children
-    private List<GridController> gridControllers;
+    private Set<GridController> gridControllers;
 
     //I think we just create a new one and don't do anything special
     public RequestServer(){
         monomeApps = new HashSet<>();
-        gridControllers = new ArrayList<>();
+        gridControllers = new HashSet<>();
     }
 
 
@@ -40,7 +40,17 @@ public class RequestServer {
         gridControllers.add(gridController);
     }
 
-    public List<GridController> getGridControllers() {
+    public void removeMonomeController(GridController gridController){
+        gridControllers.remove(gridController);
+        // Tell app to rescan devices
+        // ArrayList can be empty because the device is just watching for the string
+        for(MonomeApp monomeApp : monomeApps){
+            sendResponse(monomeApp, Constants.REMOVE_STRING,
+                    new OSCMessageInfo(Constants.DEVICE_TYPE_TAG),
+                    new ArrayList());
+        }
+    }
+    public Set<GridController> getGridControllers() {
         return gridControllers;
     }
 
@@ -67,7 +77,6 @@ public class RequestServer {
     }
 
     // This method tells registered apps when a new device has been added
-    // TODO: Notify app when device has been removed
     public void notifyListeners(MonomeController monomeController){
 
         //Get the controller's input port

@@ -1,13 +1,16 @@
 package com.SitStayCreate.CerealOSC.MonomeDevice;
 
+import com.SitStayCreate.CerealOSC.MonomeApp.MonomeApp;
 import com.SitStayCreate.CerealOSC.OSC.DecoratedOSCPortIn;
 import com.SitStayCreate.CerealOSC.OSC.DecoratedOSCPortOut;
-import com.SitStayCreate.CerealOSC.MonomeApp.MonomeApp;
+import com.SitStayCreate.CerealOSC.RequestServer.RequestServer;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public abstract class MonomeController {
 
+    protected RequestServer requestServer;
     protected DecoratedOSCPortIn decoratedOSCPortIn;
     protected DecoratedOSCPortOut decoratedOSCPortOut;
     protected String id, prefix;
@@ -17,13 +20,15 @@ public abstract class MonomeController {
 
     public MonomeController(MonomeApp monomeApp,
                             DecoratedOSCPortIn decoratedOSCPortIn,
-                            DecoratedOSCPortOut decoratedOSCPortOut) {
+                            DecoratedOSCPortOut decoratedOSCPortOut,
+                            RequestServer requestServer) {
         this.monomeApp = monomeApp;
         setId(String.format("ssc-0%d", count));
         // Dummy value - app can crash without this
         setPrefix("/SSC");
         setDecoratedOSCPortIn(decoratedOSCPortIn);
         setDecoratedOSCPortOut(decoratedOSCPortOut);
+        setRequestServer(requestServer);
         count++;
     }
 
@@ -66,7 +71,37 @@ public abstract class MonomeController {
         this.prefix = prefix;
     };
 
+    public RequestServer getRequestServer() {
+        return requestServer;
+    }
+
+    public void setRequestServer(RequestServer requestServer) {
+        this.requestServer = requestServer;
+    }
+
     public abstract void addSysListeners();
 
     public abstract void close();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MonomeController that = (MonomeController) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "MonomeController{" +
+                "id='" + id + '\'' +
+                ", prefix='" + prefix + '\'' +
+                ", monomeApp=" + monomeApp +
+                '}';
+    }
 }
