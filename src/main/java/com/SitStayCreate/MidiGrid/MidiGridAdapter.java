@@ -5,6 +5,7 @@ import com.SitStayCreate.CerealOSC.MonomeDevice.Dimensions;
 import com.SitStayCreate.CerealOSC.MonomeDevice.GridController;
 import com.SitStayCreate.CerealOSC.OSC.DecoratedOSCPortIn;
 import com.SitStayCreate.CerealOSC.OSC.DecoratedOSCPortOut;
+import com.SitStayCreate.CerealOSC.RequestServer.RequestServer;
 import com.SitStayCreate.Constants;
 import com.SitStayCreate.MidiGrid.LEDListeners.*;
 import com.illposed.osc.*;
@@ -25,27 +26,17 @@ public class MidiGridAdapter extends GridController implements Transmitter, Rece
     //Represents the midi controller
     private HardwareDevice hardwareDevice;
 
-    //Listeners
-    private MGLEDSetListener mgledSetListener;
-    private MGLEDAllListener mgledAllListener;
-    private MGLEDMapListener mgledMapListener;
-    private MGLEDRowListener mgledRowListener;
-    private MGLEDColListener mgledColListener;
-    private MGLEDLevelSetListener mgledLevelSetListener;
-    private MGLEDLevelAllListener mgledLevelAllListener;
-    private MGLEDLevelMapListener mgledLevelMapListener;
-    private MGLEDLevelRowListener mgledLevelRowListener;
-    private MGLEDLevelColListener mgledLevelColListener;
-
 
     public MidiGridAdapter(MonomeApp monomeApp,
                            Dimensions dimensions,
                            int portInNumber,
-                           HardwareDevice hardwareDevice) throws IOException {
+                           HardwareDevice hardwareDevice,
+                           RequestServer requestServer) throws IOException {
         super(monomeApp,
                 new DecoratedOSCPortIn(portInNumber),
                 new DecoratedOSCPortOut(monomeApp.getInetAddress(), monomeApp.getPortNumber()),
-                dimensions);
+                dimensions,
+                requestServer);
         setHardwareDevice(hardwareDevice);
         connectMidi();
         addLEDListeners();
@@ -56,52 +47,53 @@ public class MidiGridAdapter extends GridController implements Transmitter, Rece
         int channel = hardwareDevice.getChannel();
         String ledSetSelectorRegex = Constants.LED_SET_SELECTOR_REGEX;
         JavaRegexAddressMessageSelector ledSetMessageSelector = new JavaRegexAddressMessageSelector(ledSetSelectorRegex);
-        mgledSetListener = new MGLEDSetListener(dimensions, receiver, channel);
+        //Listeners
+        MGLEDSetListener mgledSetListener = new MGLEDSetListener(dimensions, receiver, channel);
         decoratedOSCPortIn.getOscPortIn().getDispatcher().addListener(ledSetMessageSelector, mgledSetListener);
 
         String ledAllSelectorRegex = Constants.LED_ALL_SELECTOR_REGEX;
         JavaRegexAddressMessageSelector ledAllMessageSelector = new JavaRegexAddressMessageSelector(ledAllSelectorRegex);
-        mgledAllListener = new MGLEDAllListener(dimensions, receiver, channel);
+        MGLEDAllListener mgledAllListener = new MGLEDAllListener(dimensions, receiver, channel);
         decoratedOSCPortIn.getOscPortIn().getDispatcher().addListener(ledAllMessageSelector, mgledAllListener);
 
         String ledMapSelectorRegex = Constants.LED_MAP_SELECTOR_REGEX;
         JavaRegexAddressMessageSelector ledMapMessageSelector = new JavaRegexAddressMessageSelector(ledMapSelectorRegex);
-        mgledMapListener = new MGLEDMapListener(dimensions, receiver, channel);
+        MGLEDMapListener mgledMapListener = new MGLEDMapListener(dimensions, receiver, channel);
         decoratedOSCPortIn.getOscPortIn().getDispatcher().addListener(ledMapMessageSelector, mgledMapListener);
 
         String ledRowSelectorRegex = Constants.LED_ROW_SELECTOR_REGEX;
         JavaRegexAddressMessageSelector ledRowMessageSelector = new JavaRegexAddressMessageSelector(ledRowSelectorRegex);
-        mgledRowListener = new MGLEDRowListener(dimensions, receiver, channel);
+        MGLEDRowListener mgledRowListener = new MGLEDRowListener(dimensions, receiver, channel);
         decoratedOSCPortIn.getOscPortIn().getDispatcher().addListener(ledRowMessageSelector, mgledRowListener);
 
         String ledColSelectorRegex = Constants.LED_COL_SELECTOR_REGEX;
         JavaRegexAddressMessageSelector ledColMessageSelector = new JavaRegexAddressMessageSelector(ledColSelectorRegex);
-        mgledColListener = new MGLEDColListener(dimensions, receiver, channel);
+        MGLEDColListener mgledColListener = new MGLEDColListener(dimensions, receiver, channel);
         decoratedOSCPortIn.getOscPortIn().getDispatcher().addListener(ledColMessageSelector, mgledColListener);
 
         String ledLevelSetSelectorRegex = Constants.LED_LEVEL_SET_SELECTOR_REGEX;
         JavaRegexAddressMessageSelector ledLevelSetMessageSelector = new JavaRegexAddressMessageSelector(ledLevelSetSelectorRegex);
-        mgledLevelSetListener = new MGLEDLevelSetListener(dimensions, receiver, channel);
+        MGLEDLevelSetListener mgledLevelSetListener = new MGLEDLevelSetListener(dimensions, receiver, channel);
         decoratedOSCPortIn.getOscPortIn().getDispatcher().addListener(ledLevelSetMessageSelector, mgledLevelSetListener);
 
         String ledLevelAllSelectorRegex = Constants.LED_LEVEL_ALL_SELECTOR_REGEX;
         JavaRegexAddressMessageSelector ledLevelAllMessageSelector = new JavaRegexAddressMessageSelector(ledLevelAllSelectorRegex);
-        mgledLevelAllListener = new MGLEDLevelAllListener(dimensions, receiver, channel);
+        MGLEDLevelAllListener mgledLevelAllListener = new MGLEDLevelAllListener(dimensions, receiver, channel);
         decoratedOSCPortIn.getOscPortIn().getDispatcher().addListener(ledLevelAllMessageSelector, mgledLevelAllListener);
 
         String ledLevelMapSelectorRegex = Constants.LED_LEVEL_MAP_SELECTOR_REGEX;
         JavaRegexAddressMessageSelector ledLevelMapMessageSelector = new JavaRegexAddressMessageSelector(ledLevelMapSelectorRegex);
-        mgledLevelMapListener = new MGLEDLevelMapListener(dimensions, receiver, channel);
+        MGLEDLevelMapListener mgledLevelMapListener = new MGLEDLevelMapListener(dimensions, receiver, channel);
         decoratedOSCPortIn.getOscPortIn().getDispatcher().addListener(ledLevelMapMessageSelector, mgledLevelMapListener);
 
         String ledLevelRowSelectorRegex = Constants.LED_LEVEL_ROW_SELECTOR_REGEX;
         JavaRegexAddressMessageSelector ledLevelRowMessageSelector = new JavaRegexAddressMessageSelector(ledLevelRowSelectorRegex);
-        mgledLevelRowListener = new MGLEDLevelRowListener(dimensions, receiver, channel);
+        MGLEDLevelRowListener mgledLevelRowListener = new MGLEDLevelRowListener(dimensions, receiver, channel);
         decoratedOSCPortIn.getOscPortIn().getDispatcher().addListener(ledLevelRowMessageSelector, mgledLevelRowListener);
 
         String ledLevelColSelectorRegex = Constants.LED_LEVEL_COL_SELECTOR_REGEX;
         JavaRegexAddressMessageSelector ledLevelColMessageSelector = new JavaRegexAddressMessageSelector(ledLevelColSelectorRegex);
-        mgledLevelColListener = new MGLEDLevelColListener(dimensions, receiver, channel);
+        MGLEDLevelColListener mgledLevelColListener = new MGLEDLevelColListener(dimensions, receiver, channel);
         decoratedOSCPortIn.getOscPortIn().getDispatcher().addListener(ledLevelColMessageSelector, mgledLevelColListener);
     }
 
@@ -111,19 +103,6 @@ public class MidiGridAdapter extends GridController implements Transmitter, Rece
 
     public HardwareDevice getHardwareDevice() {
         return hardwareDevice;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public DecoratedOSCPortIn getDecoratedOSCPortIn() {
-        return decoratedOSCPortIn;
-    }
-
-    public DecoratedOSCPortOut getDecoratedOSCPortOut() {
-        return decoratedOSCPortOut;
     }
 
     private void connectMidi() {
@@ -171,14 +150,8 @@ public class MidiGridAdapter extends GridController implements Transmitter, Rece
     //It doesn't make sense to close the interfaces here, so the most sensible thing is
     //closing the open OSC ports.
     public void close() {
-        try {
-            decoratedOSCPortOut.close();
-            decoratedOSCPortIn.close();
-            hardwareDevice.close();
-            //TODO: Rest of the stuff required to close this device
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        super.close();
+        hardwareDevice.close();
     }
 
     //Transmitter Methods

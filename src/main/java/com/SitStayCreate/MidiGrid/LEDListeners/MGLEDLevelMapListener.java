@@ -6,6 +6,7 @@ import com.SitStayCreate.MidiGrid.OSCTranslator;
 
 import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
+import java.util.List;
 
 public class MGLEDLevelMapListener extends LEDLevelMapListener {
 
@@ -39,36 +40,42 @@ public class MGLEDLevelMapListener extends LEDLevelMapListener {
         return channel;
     }
 
+    public void setChannel(int channel) {
+        this.channel = channel;
+    }
+
     @Override
-    public void setLEDLevelMap(int xOffset, int yOffset, int ledState, int counter) {
-        //xOffset should only be greater than 0 for *x16 grids
+    public void setLEDLevelMap(List oscList) {
+        int xOffset = (int) oscList.get(0);
+        int yOffset = (int) oscList.get(1);
+        //xOffset should only be greater than 0 for 16x* grids
         if((dims.getWidth()) == 8) {
             if(xOffset > 0){
                 return;
             }
         }
 
-        //yOffset should only be greater than 0 for 16x* grids
+        //yOffset should only be greater than 0 for *x16 grids
         if((dims.getHeight()) == 8) {
             if(yOffset > 0){
                 return;
             }
         }
+        // loop through the list and send midi messages to light LEDs
+        for(int i = 2; i < oscList.size(); i++){
+            // Subtract 2 so count == 0
+            int count = i - 2;
+            int xCounter = count % 8; // increments to 7 then resets
+            int yCounter = (int) Math.floor(count / 8); // 0-7 = 0, 8-15 = 1, ...
 
-        int xCounter = counter % 8; // increments to 7 then resets
-        int yCounter = (int) Math.floor(counter / 8); // 0-7 = 0, 8-15 = 1, ...
+            int x = xOffset + xCounter;
+            int y = yOffset + yCounter;
 
-        int x = xOffset + xCounter;
-        int y = yOffset + yCounter;
-
-        ShortMessage shortMessage = OSCTranslator.translateGridLevelToMidi(x,
-                y,
-                ledState,
-                dims, channel);
-        receiver.send(shortMessage, -1);
-    }
-
-    public void setChannel(int channel) {
-        this.channel = channel;
+            ShortMessage shortMessage = OSCTranslator.translateGridLevelToMidi(x,
+                    y,
+                    (int) oscList.get(i),
+                    dims, channel);
+            receiver.send(shortMessage, -1);
+        }
     }
 }

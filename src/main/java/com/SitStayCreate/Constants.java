@@ -71,6 +71,7 @@ public class Constants {
     // RequestServer
     public static final String LIST_STRING = "/serialosc/list";
     public static final String NOTIFY_STRING = "/serialosc/notify";
+    public static final String REMOVE_STRING = "/serialosc/remove";
     public static final String DEVICE_STRING = "/serialosc/device";
     public static final String DEVICE_TYPE_TAG = "ssi";
 

@@ -6,6 +6,7 @@ import com.SitStayCreate.MidiGrid.OSCTranslator;
 
 import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
+import java.util.List;
 
 public class MGLEDLevelRowListener extends LEDLevelRowListener {
     private Dimensions dims;
@@ -38,35 +39,30 @@ public class MGLEDLevelRowListener extends LEDLevelRowListener {
         return channel;
     }
 
-    @Override
-    public void setLEDLevelRow(int xOffset, int gridY, int xCounter, int ledState) {
-        if(dims.getWidth() == 8) {
-            //xOffset should only be greater than 0 for 8x16 grids
-            if(xOffset > 0){
-                return;
-            //8x8 grids can only support messages with 10 args, some will have 18
-            } else if (xCounter >= 8) {
-                return;
-            }
-        }
-
-        //y cannot be more than 7 on grids with 8 rows
-        if(dims.getHeight() == 8){
-            if(gridY >= 8){
-                return;
-            }
-        }
-
-        ShortMessage shortMessage = OSCTranslator.translateGridLevelToMidi(xOffset + xCounter,
-                gridY,
-                ledState,
-                dims,
-                channel);
-        receiver.send(shortMessage, -1);
-    }
-
     public void setChannel(int channel) {
         this.channel = channel;
     }
 
+    @Override
+    public void setLEDLevelRow(List oscList) {
+        int xOffset = (int) oscList.get(0);
+        int y = (int) oscList.get(1);
+        if(dims.getWidth() == 8) {
+            //xOffset should only be greater than 0 for *x16 grids
+            if(xOffset > 0){
+                return;
+            }
+        }
+        for (int i = 2; i < oscList.size(); i++){
+            // Subtract 2 from i so count starts at 0
+            int count = i - 2;
+            int x = xOffset + count;
+            ShortMessage shortMessage = OSCTranslator.translateGridLevelToMidi(x,
+                    y,
+                    (int) oscList.get(i),
+                    dims,
+                    channel);
+            receiver.send(shortMessage, -1);
+        }
+    }
 }

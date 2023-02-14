@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.SitStayCreate</groupId>
   <artifactId>Midi2OSC</artifactId>
-  <version>1.1.03</version>
+  <version>1.0.2</version>
   <packaging>jar</packaging>
 
   <name>Midi2OSC</name>
@@ -69,7 +69,7 @@
               <descriptorRefs>
                   <descriptorRef>jar-with-dependencies</descriptorRef>
               </descriptorRefs>
-              <finalName>Midi2OSC-1.0.1</finalName>
+              <finalName>Midi2OSC-1.0.2</finalName>
               <appendAssemblyId>false</appendAssemblyId>
           </configuration>
         </plugin>

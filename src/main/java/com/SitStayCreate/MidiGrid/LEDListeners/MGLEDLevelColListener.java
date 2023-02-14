@@ -6,6 +6,7 @@ import com.SitStayCreate.MidiGrid.OSCTranslator;
 
 import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
+import java.util.List;
 
 public class MGLEDLevelColListener extends LEDLevelColListener {
 
@@ -39,25 +40,30 @@ public class MGLEDLevelColListener extends LEDLevelColListener {
         return channel;
     }
 
-    @Override
-    public void setLEDLevelCol(int gridX, int yOffset, int ledState, int yCounter) {
+    public void setChannel(int channel) {
+        this.channel = channel;
+    }
 
-        if(dims.getHeight() == 8) {
-            if(yOffset > 0){   //yOffset should only be greater than 0 for 8x16 grids
-                return;
-            } else if (yCounter >= 8) { //8x8/16 grids can only support messages with 10 args, some will have 18
+    @Override
+    public void setLEDLevelCol(List oscList) {
+        int x = (int) oscList.get(0);
+        int yOffset = (int) oscList.get(1);
+        if(dims.getWidth() == 8) {
+            //yOffset should only be greater than 0 for 16x* grids
+            if(yOffset > 0){
                 return;
             }
         }
-
-        ShortMessage shortMessage = OSCTranslator.translateGridLevelToMidi(gridX,
-                yOffset + yCounter,
-                ledState,
-                dims, channel);
-        receiver.send(shortMessage, -1);
-    }
-
-    public void setChannel(int channel) {
-        this.channel = channel;
+        for (int i = 2; i < oscList.size(); i++){
+            // Subtract 2 from i so count starts at 0
+            int count = i - 2;
+            int y = yOffset + count;
+            ShortMessage shortMessage = OSCTranslator.translateGridLevelToMidi(x,
+                    y,
+                    (int) oscList.get(i),
+                    dims,
+                    channel);
+            receiver.send(shortMessage, -1);
+        }
     }
 }

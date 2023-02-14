@@ -15,6 +15,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Set;
 
 public class SBActionListener implements ActionListener {
     private GridPanel gridPanel;
@@ -53,7 +54,7 @@ public class SBActionListener implements ActionListener {
         //Validate portIn is not already in use by another grid or the system
         int portIn = gridPanel.getPortIn();
 
-        List<GridController> controllers = requestServer.getGridControllers();
+        Set<GridController> controllers = requestServer.getGridControllers();
         //Check that the port is not already in use, if it is, do not create a device
         for(MonomeController controller : controllers){
             if(controller.getDecoratedOSCPortIn().getPortIn() == portIn){
@@ -64,7 +65,6 @@ public class SBActionListener implements ActionListener {
 
         gridPanel.clearErrorLabel();
 
-
         HardwareDevice hardwareDevice = midiPanel.createHardwareDevice();
 
         //create OscDevice
@@ -72,7 +72,8 @@ public class SBActionListener implements ActionListener {
             MidiGridAdapter grid = new MidiGridAdapter(new MonomeApp(Constants.DEFAULT_PORT),
                     midiPanel.getDims(),
                     portIn,
-                    hardwareDevice);
+                    hardwareDevice,
+                    requestServer);
 
             //give the request server a reference to the oscDevice to serve to apps
             requestServer.addMonomeController(grid);
